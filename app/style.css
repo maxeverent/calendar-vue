@@ -1,0 +1,80 @@
+@font-face {
+    font-family: 'Product Sans Bold';
+    src: url('./fonts/Product\ Sans\ Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Product Sans Regular';
+    src: url('./fonts/Product\ Sans\ Regular.ttf');
+}
+
+
+.button {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    font-size: 30px;
+    color: black
+}
+
+.back-button {
+    margin-top: 100px;
+    width: 500px;
+    height: 200px;
+    border-radius: 100%;
+    font-size: 30px;
+    font-family: 'Product Sans Bold';
+    font-size: 25px;
+    color: black;
+    background: #DFDFE5;
+}
+
+.body-calendar {
+    width: 1200px;
+    height: 2000px;
+}
+
+.nav {
+    border-radius: 100%;
+    margin-top: 150px;
+    margin-bottom: 150px;
+    justify-content: space-between;
+    font-family: 'Product Sans Bold';
+    font-size: 25px;
+    color: black;
+    padding: 50px;
+    background: #DFDFE5;
+}
+
+.label-empty {
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+    padding-top: 35px;
+    margin: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    background: white;
+}
+
+.column {}
+
+.label {
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+    padding-top: 35px;
+    margin: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    text-align: center;
+    background: #DFDFE5;
+    font-family: 'Product Sans Bold';
+    font-size: 18px;
+}
+
+.labelnowdate {
+    background: #ada8a8;
+    color: white
+}
