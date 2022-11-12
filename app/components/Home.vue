@@ -7,7 +7,10 @@
             <StackLayout  class="body-calendar">
                 <FlexboxLayout class="nav">
                     <Button text="<-" @tap="beforePage" class="button" />
-                    <Label>{{calendar[numberPage].name_mounth}}</Label>
+                    <StackLayout>
+                        <Label>{{calendar.name_mounth}}</Label>
+                        <Label class="now-year">{{calendar.year}}</Label>
+                    </StackLayout>
                     <Button text="->" @tap="nextPage" class="button" />
                 </FlexboxLayout>
                 <Flexboxlayout>
@@ -18,7 +21,7 @@
                         </StackLayout>
                         <StackLayout>
                             <Label 
-                                v-for="day in calendar[numberPage].days" 
+                                v-for="day in calendar.days" 
                                 v-if="weekDay.num === getWeekDay(numberPage, day)"
                                 :class="{labelnowdate: nowDateClass(day, numberPage)}"
                                 class="label"
@@ -37,27 +40,28 @@
   export default {
     data() {
         return {
+            nowYear: new Date().getFullYear(),
             numberPage: new Date().getMonth(),
             nowDay: new Date().getDate(),
             nowMonth: new Date().getMonth(),
             weekDays: [{num: 1 , nameDay: "Mo"}, {num: 2 , nameDay: "Tu"},
                 {num: 3 , nameDay: "We"}, {num: 4 , nameDay: "Th"}, {num: 5 , nameDay: "Fr"}, 
                 {num: 6 , nameDay: "Sa"}, {num: 0 , nameDay: "Su"}, ],
-            calendar: [],
+            calendar: null,
             mounths: ['January', 'February', 'Mart', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         }
     },
     methods: {
         setCalendar() {
-            for (let i = 0; i < 12; ++i) {
-                let days = new Date(2022, i + 1, 0).getDate()
-                this.calendar.push({mounths: i + 1, name_mounth: this.mounths[i], days: days})
-            }
+            let days = new Date(this.nowYear, this.numberPage + 1, 0).getDate()
+            //this.calendar = null
+            this.calendar = {mounths: this.numberPage, name_mounth: this.mounths[this.numberPage], days: days, year: this.nowYear}
             console.log(this.calendar)
         },
         nextPage() {
             if (this.numberPage === 11) {
                 this.numberPage = 0
+                this.nowYear++
             }
             else {
                 this.numberPage += 1
@@ -66,13 +70,14 @@
         beforePage() {
             if (this.numberPage === 0) {
                 this.numberPage = 11
+                this.nowYear--
             }
             else {
                 this.numberPage -= 1
             } 
         },
         getWeekDay(mounth, day) {
-            const test = new Date(2022, mounth, day).getDay()
+            const test = new Date(this.nowYear, mounth, day).getDay()
             return test           
         },
         sortDaysWeek(mounth, num, index) {
@@ -90,7 +95,10 @@
         },
         backToNowMounth() {
             let nowMounth = new Date().getMonth()
-            this.numberPage = nowMounth 
+            let nowYear = new Date().getFullYear()
+            this.numberPage = nowMounth
+            this.nowYear = nowYear
+             
         },
         nowDateClass(day, numberPage) {
             if (day === this.nowDay && numberPage === this.nowMonth) {
@@ -101,6 +109,14 @@
     },
     created() {
         this.setCalendar()
+    },
+    watch: {
+        numberPage() {
+            this.setCalendar()
+        },
+        nowYear() {
+            this.setCalendar()
+        }
     }
   };
 

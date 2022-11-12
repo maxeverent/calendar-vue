@@ -46,6 +46,12 @@
     background: #DFDFE5;
 }
 
+.now-year {
+    font-size: 25px;
+    font-family: 'Product Sans Bold';
+    text-align: center;
+}
+
 .label-empty {
     border-radius: 100%;
     width: 150px;
